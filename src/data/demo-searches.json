@@ -1,1 +1,116 @@
-{}
+{
+  "auto honda under 80k, after 2018, near pj": {
+    "make": "Honda",
+    "model": null,
+    "body": null,
+    "transmission": "auto",
+    "fuel": null,
+    "price_min": null,
+    "price_max": 80000,
+    "year_min": 2018,
+    "year_max": null,
+    "mileage_max": null,
+    "seats_min": null,
+    "states": [
+      "Selangor"
+    ],
+    "semantic_query": null,
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "unsupported": []
+  },
+  "kereta 7 seater bawah 70k kat johor": {
+    "make": null,
+    "model": null,
+    "body": null,
+    "transmission": null,
+    "fuel": null,
+    "price_min": null,
+    "price_max": 70000,
+    "year_min": null,
+    "year_max": null,
+    "mileage_max": null,
+    "seats_min": 7,
+    "states": [
+      "Johor"
+    ],
+    "semantic_query": null,
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "unsupported": []
+  },
+  "first car for a fresh grad, cheap to maintain": {
+    "make": null,
+    "model": null,
+    "body": null,
+    "transmission": null,
+    "fuel": null,
+    "price_min": null,
+    "price_max": null,
+    "year_min": null,
+    "year_max": null,
+    "mileage_max": null,
+    "seats_min": null,
+    "states": [],
+    "semantic_query": "first car for a fresh graduate, cheap to maintain",
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "unsupported": []
+  },
+  "good for grab driving in kl": {
+    "make": null,
+    "model": null,
+    "body": null,
+    "transmission": null,
+    "fuel": null,
+    "price_min": null,
+    "price_max": null,
+    "year_min": null,
+    "year_max": null,
+    "mileage_max": null,
+    "seats_min": null,
+    "states": [
+      "Kuala Lumpur"
+    ],
+    "semantic_query": "good for e-hailing (Grab) driving, reliable and fuel-efficient for daily city use",
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "unsupported": []
+  },
+  "suv with a big boot for a stroller, hybrid": {
+    "make": null,
+    "model": null,
+    "body": "suv",
+    "transmission": null,
+    "fuel": "hybrid",
+    "price_min": null,
+    "price_max": null,
+    "year_min": null,
+    "year_max": null,
+    "mileage_max": null,
+    "seats_min": null,
+    "states": [],
+    "semantic_query": "big boot for a stroller",
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "unsupported": []
+  },
+  "cheap car": {
+    "make": null,
+    "model": null,
+    "body": null,
+    "transmission": null,
+    "fuel": null,
+    "price_min": null,
+    "price_max": null,
+    "year_min": null,
+    "year_max": null,
+    "mileage_max": null,
+    "seats_min": null,
+    "states": [],
+    "semantic_query": null,
+    "needs_clarification": true,
+    "clarifying_question": "What is your budget for the car you're looking for?",
+    "unsupported": []
+  }
+}

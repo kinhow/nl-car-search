@@ -41,11 +41,13 @@ Every change to a prompt, schema or model is measured, not eyeballed. `npm run e
 | **Grounded answers** ([24 cases](evals/ask-cases.json)) | Road-tax calculations, guide facts, listing facts, unanswerable questions, injection | Deterministic checks: required values in the answer, required citations, `grounded` false when it should decline. |
 
 <!-- RESULTS:START -->
-| Suite | Result | Run |
-|---|---|---|
-| Retrieval (24 queries, English + Malay) | **80.0% precision@10**, 4.8× over random (16.8%) | 2026-11-28, `paraphrase-multilingual-MiniLM-L12-v2` |
-| Retrieval, English-only model (for comparison) | 60.4% precision@10, 3.6× | 2026-11-28, `all-MiniLM-L6-v2` |
-| Query → filters, grounded answers | _not run yet (needs Claude API credits)_ | |
+Run 2026-11-28, `claude-haiku-5-5`, local `paraphrase-multilingual-MiniLM-L12-v2` embeddings. Full table: [evals/results/summary.md](evals/results/summary.md).
+
+| Suite | Headline |
+|---|---|
+| Query → filters (93 queries) | **97.8% exact match**, 100% field accuracy, 0% made-up filters · Malay 94.1% · p50 1.5 s · $0.13 per 1,000 queries |
+| Retrieval (24 queries) | **80.0% precision@10**, 4.8× over random (English-only MiniLM: 60.4%) |
+| Grounded answers (24 questions) | **100% pass**: right answer + citations, every unanswerable question declined |
 <!-- RESULTS:END -->
 
 ## Demo mode

@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "cases": 24,
+    "passRate": 1,
+    "answerableCorrect": 1,
+    "unanswerableCorrect": 1,
+    "guideRecallAt3": 1
+  },
+  "failures": []
+}
