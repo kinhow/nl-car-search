@@ -6,6 +6,7 @@ import { askAboutListing } from "../src/lib/ask";
 import { LISTINGS, applyFilters } from "../src/lib/search";
 import { rankBySimilarity } from "../src/lib/vector-index";
 import { sanitize } from "../src/lib/validate";
+import { fastPath } from "../src/lib/fast-path";
 import { EMPTY_FILTERS, FILTER_KEYS, type FilterKey, type Filters, type Listing } from "../src/lib/types";
 
 const THRESHOLDS = { parseExact: 0.85, parseField: 0.97, retrievalP10: 0.6, ask: 0.85 };
@@ -91,12 +92,12 @@ async function evalParse() {
   const rows = await pool(cases, 6, async (c) => {
     const t = performance.now();
     try {
-      const { output, usage } = await parseQueryDetailed(c.q);
+      const { output, usage, timing } = await parseQueryDetailed(c.q);
       const ms = performance.now() - t;
       const { filters } = sanitize(output);
       const flags = { semantic: output.semantic_query != null, clarify: output.needs_clarification, unsupported: output.unsupported.length > 0 };
       const cost = (usage.input_tokens * PRICE.in) + (usage.output_tokens * PRICE.out) + ((usage.cache_creation_input_tokens ?? 0) * PRICE.cacheWrite) + ((usage.cache_read_input_tokens ?? 0) * PRICE.cacheRead);
-      return { case: c, got: filters, raw: output, ms, cost, ...gradeParse(c, filters, flags) };
+      return { case: c, got: filters, raw: output, ms, timing, outTokens: usage.output_tokens, cost, ...gradeParse(c, filters, flags) };
     } catch (err) {
       return { case: c, error: (err as Error).message, ms: performance.now() - t, cost: 0, fields: [], flags: { semantic: false, clarify: false, unsupported: false }, exact: false };
     }
@@ -113,6 +114,7 @@ async function evalParse() {
     return { tag: t, n: rs.length, exact: rs.filter((r) => r.exact).length / rs.length };
   });
   const latencies = rows.map((r) => r.ms);
+  const ok = rows.filter((r) => "timing" in r && r.timing) as { timing: { firstTokenMs: number; outputMs: number }; outTokens: number }[];
   const summary = {
     model: PARSE_MODEL,
     cases: rows.length,
@@ -126,6 +128,9 @@ async function evalParse() {
     unsupportedAccuracy: rows.filter((r) => r.flags.unsupported).length / rows.length,
     p50ms: Math.round(quantile(latencies, 0.5)),
     p95ms: Math.round(quantile(latencies, 0.95)),
+    p50FirstTokenMs: ok.length ? quantile(ok.map((r) => r.timing.firstTokenMs), 0.5) : 0,
+    p50OutputMs: ok.length ? quantile(ok.map((r) => r.timing.outputMs), 0.5) : 0,
+    p50OutputTokens: ok.length ? quantile(ok.map((r) => r.outTokens), 0.5) : 0,
     costPer1kQueries: (rows.reduce((a, r) => a + r.cost, 0) / rows.length) * 1000,
     byTag,
   };
@@ -139,6 +144,25 @@ async function evalParse() {
   write("parse.json", { summary, failures });
   const pass = summary.exactMatch >= THRESHOLDS.parseExact && summary.fieldAccuracy >= THRESHOLDS.parseField;
   return { pass, summary, failures };
+}
+
+// ── Fast path: simple queries read without the LLM ───────────────────────────
+// Free and deterministic. The gate: every query that the fast path accepts must
+// be an exact match, so it can never lower the AI search exact-match rate.
+function evalFastPath() {
+  const cases = read<ParseCase[]>("./parse-cases.json");
+  const rows = cases.map((c) => {
+    const got = fastPath(c.q);
+    if (!got) return { q: c.q, covered: false, exact: false, wrong: [] as string[] };
+    const g = gradeParse(c, got, { semantic: false, clarify: false, unsupported: false });
+    const wrong = [...g.fields.filter((f) => !f.ok).map((f) => `${f.key}: want ${JSON.stringify(f.want)}, got ${JSON.stringify(f.got)}`), ...Object.entries(g.flags).filter(([, ok]) => !ok).map(([k]) => `flag ${k}`)];
+    return { q: c.q, covered: true, exact: g.exact, wrong };
+  });
+  const covered = rows.filter((r) => r.covered);
+  const summary = { cases: rows.length, covered: covered.length, coverage: covered.length / rows.length, accuracy: covered.length ? covered.filter((r) => r.exact).length / covered.length : 1 };
+  const failures = covered.filter((r) => !r.exact);
+  write("fastpath.json", { summary, covered: covered.map((r) => r.q), failures });
+  return { pass: summary.accuracy === 1, summary, failures };
 }
 
 // ── Retrieval: soft preference → ranked listings ─────────────────────────────
@@ -237,10 +261,22 @@ if (which === "all" || which === "parse") {
     `| Soft-preference detection | ${pct(s.semanticAccuracy)} |`,
     `| "Not on this marketplace" detection | ${pct(s.unsupportedAccuracy)} |`,
     `| Latency p50 / p95 | ${s.p50ms} ms / ${s.p95ms} ms |`,
+    `| p50 split: first token / output | ${s.p50FirstTokenMs} ms / ${s.p50OutputMs} ms (${s.p50OutputTokens} output tokens) |`,
     `| Cost per 1,000 queries | $${s.costPer1kQueries.toFixed(3)} |`, ``,
     `Exact match by case type: ${s.byTag.map((t) => `${t.tag} ${pct(t.exact)} (${t.n})`).join(" · ")}`, ``,
   );
   console.log("parse", s, failures.slice(0, 15));
+}
+if (which === "all" || which === "fastpath") {
+  const { pass, summary: s, failures } = evalFastPath();
+  ok &&= pass;
+  lines.push(
+    `## Fast path: simple queries without the LLM (${s.cases} labelled queries)`, ``,
+    `| Metric | Result |`, `|---|---|`,
+    `| Queries the fast path reads | ${s.covered} (${pct(s.coverage)}) |`,
+    `| Exact match on those queries (must be 100%) | **${pct(s.accuracy)}** |`, ``,
+  );
+  console.log("fastpath", s, failures);
 }
 if (which === "all" || which === "retrieval") {
   const { pass, summary: s } = await evalRetrieval();

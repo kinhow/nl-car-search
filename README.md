@@ -74,17 +74,21 @@ npm run eval                    # all eval suites (needs keys)
 
 ## Design choices
 
-- **Structured output, not free text.** `client.messages.parse` with a Zod schema guarantees valid JSON and valid enum values, so the guardrails only check that the values make sense together.
+- **Structured output, not free text.** `client.messages.stream` with a Zod schema guarantees valid JSON and valid enum values, so the guardrails only check that the values make sense together.
 - **Nullable by default.** Every filter can be `null`, and the prompt says to leave unmentioned fields empty. The eval counts made-up filters separately, because over-filtering silently hides good cars.
 - **Haiku 5.5 at low effort.** Extraction is a narrow task. The eval shows whether a bigger model would be worth paying for.
 - **No vector database.** 2,000 vectors fit in 4 MB of memory. A database would add setup without improving the demo.
 - **Hidden traits for honest retrieval evals.** Descriptions imply traits ("fits a stroller and golf bag") without naming them, so retrieval has to work on meaning.
+- **Skip the LLM when it can't help.** A repeat query uses a cached result (in memory, free). A simple query where every word is a make, model, place, price or year takes the fast path (`src/lib/fast-path.ts`) and needs no LLM call. `npm run eval:fastpath` checks that every query it reads is an exact match. AI search time is mostly the first token (p50 978 ms of 1,447 ms), so a smaller output schema would save little.
+- **Model in the bundle.** `npm run build` downloads the embedding model into `models/` (118 MB, too big for git), and Vercel ships it, so a cold start doesn't download it. The model loads at the same time as the LLM call.
 - **Fails visibly.** If the LLM or embeddings fail, search falls back to keyword matching or year order, and the UI shows a note instead of an error.
 
 ## Project layout
 
 ```
 src/lib/parse-query.ts   query → filters (Claude, structured output)
+src/lib/fast-path.ts     simple queries → filters without the LLM
+src/lib/query-cache.ts   cached results for repeat queries
 src/lib/validate.ts      guardrails between the LLM and the index
 src/lib/search.ts        filtering, sorting, keyword fallback
 src/lib/vector-index.ts  in-memory vectors, semantic ranking, guide retrieval

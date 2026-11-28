@@ -92,9 +92,12 @@ export const EMPTY_FILTERS: Filters = {
 
 export type ListingCard = Omit<Listing, "traits">;
 
+/** How the query was read. See GLOSSARY.md. */
+export type SearchMode = "llm" | "cached" | "fast-path" | "demo-saved" | "keyword-fallback" | "edited";
+
 export interface SearchResponse {
   query: string;
-  mode: "llm" | "demo-saved" | "keyword-fallback";
+  mode: SearchMode;
   demo: boolean;
   filters: Filters;
   semanticQuery: string | null;
@@ -103,5 +106,6 @@ export interface SearchResponse {
   notes: string[];
   total: number;
   results: (ListingCard & { score?: number })[];
-  timingMs: { parse: number; search: number };
+  /** Server time for each step. `firstToken` and `output` are only set for an AI search. */
+  timingMs: { parse: number; rank: number; total: number; firstToken?: number; output?: number };
 }
