@@ -2,16 +2,9 @@
 
 import { useState } from "react";
 import type { AskResponse } from "@/lib/ask";
+import { EXAMPLES } from "@/lib/examples";
 import type { FilterKey, Filters, ListingCard, SearchResponse } from "@/lib/types";
 
-const EXAMPLES = [
-  "auto Honda under 80k, after 2018, near PJ",
-  "kereta 7 seater bawah 70k kat Johor",
-  "first car for a fresh grad, cheap to maintain",
-  "good for Grab driving in KL",
-  "SUV with a big boot for a stroller, hybrid",
-  "cheap car",
-];
 
 const rm = (n: number) => `RM${n.toLocaleString("en-MY")}`;
 const km = (n: number) => `${n.toLocaleString("en-MY")} km`;
@@ -152,7 +145,7 @@ export function SearchApp() {
                 {data.total.toLocaleString()} cars match
                 {data.total > data.results.length && `, showing the top ${data.results.length}`}
                 {" · "}
-                {data.mode === "llm" ? "AI search" : "keyword fallback"} · parsed in {data.timingMs.parse} ms
+                {data.demo ? (data.mode === "demo-saved" ? "demo mode · saved Claude result" : "demo mode") : data.mode === "llm" ? "AI search" : "keyword fallback"} · parsed in {data.timingMs.parse} ms
               </p>
 
               <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -230,10 +223,15 @@ function AskPanel({ listing, onClose }: { listing: ListingCard; onClose: () => v
         {error && <p role="alert" className="mt-4 text-sm text-warn">{error}</p>}
         {answer && (
           <div className="mt-5 rounded-lg bg-background p-4" aria-live="polite">
-            {!answer.grounded && <p className="mb-2 text-xs font-medium uppercase tracking-wide text-warn">Not in the listing or guide</p>}
+            {!answer.grounded && !answer.demo && <p className="mb-2 text-xs font-medium uppercase tracking-wide text-warn">Not in the listing or guide</p>}
             <p className="text-sm">{answer.answer}</p>
             {answer.citations.length > 0 && (
               <p className="mt-3 text-xs text-muted">Sources: {answer.citations.map((c) => (c.id === "listing" ? "this listing" : c.title)).join(" · ")}</p>
+            )}
+            {answer.demo && answer.retrieved.length > 0 && (
+              <ul className="mt-3 list-disc pl-5 text-sm">
+                {answer.retrieved.map((r) => <li key={r.id}>{r.title} <span className="text-xs text-muted">({r.score})</span></li>)}
+              </ul>
             )}
           </div>
         )}

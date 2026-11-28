@@ -94,7 +94,8 @@ export type ListingCard = Omit<Listing, "traits">;
 
 export interface SearchResponse {
   query: string;
-  mode: "llm" | "keyword-fallback";
+  mode: "llm" | "demo-saved" | "keyword-fallback";
+  demo: boolean;
   filters: Filters;
   semanticQuery: string | null;
   clarifyingQuestion: string | null;
