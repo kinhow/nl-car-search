@@ -1,0 +1,456 @@
+{
+  "summary": {
+    "cases": 24,
+    "precisionAt10": 0.8000000000000002,
+    "baseRate": 0.16793223347057298,
+    "lift": 4.763826357017906,
+    "worst": [
+      {
+        "q": "good for Grab driving",
+        "p10": 0
+      },
+      {
+        "q": "kereta pertama untuk anak yang baru dapat lesen",
+        "p10": 0
+      },
+      {
+        "q": "easy to drive car for a new driver",
+        "p10": 0.2
+      }
+    ]
+  },
+  "rows": [
+    {
+      "q": "good for Grab driving",
+      "trait": "ehailing",
+      "p10": 0,
+      "baseRate": 0.098,
+      "top": [
+        "2024 BYD Atto 3 EV [fuel-saver]",
+        "2014 Mazda CX-5 2.0 [highway,family]",
+        "2014 Mazda CX-5 2.0 [family,performance]",
+        "2015 Toyota Camry 2.5 [highway]",
+        "2023 Proton X50 1.5 [highway,performance]",
+        "2015 Mazda Mazda3 2.0 [luxury,performance]",
+        "2014 BMW 3 Series 2.0 [highway,performance]",
+        "2015 Mazda CX-5 2.0 [performance,family]",
+        "2026 Proton S70 1.5 [performance,highway]",
+        "2015 Honda CR-V 1.5 [highway,big-boot]"
+      ]
+    },
+    {
+      "q": "car for ride-sharing passengers all day",
+      "trait": "ehailing",
+      "p10": 1,
+      "baseRate": 0.098,
+      "top": [
+        "2013 Nissan Almera 1.0 [ehailing,fuel-saver]",
+        "2022 Honda City 1.5 [ehailing,fuel-saver]",
+        "2015 Toyota Vios 1.5 [ehailing]",
+        "2017 Nissan Almera 1.0 [ehailing,big-boot]",
+        "2023 Nissan Almera 1.0 [ehailing]",
+        "2023 Perodua Bezza 1.3 [ehailing]",
+        "2024 Proton Persona 1.6 [ehailing]",
+        "2017 Toyota Vios 1.5 [ehailing]",
+        "2014 Honda City 1.5 [ehailing,fuel-saver]",
+        "2015 Perodua Myvi 1.5 [ehailing]"
+      ]
+    },
+    {
+      "q": "kereta untuk buat e-hailing",
+      "trait": "ehailing",
+      "p10": 1,
+      "baseRate": 0.098,
+      "top": [
+        "2017 Toyota Innova 2.0 [ehailing,family]",
+        "2016 Toyota Innova 2.0 [ehailing,family]",
+        "2018 Toyota Innova 2.0 [family,ehailing]",
+        "2022 Proton Persona 1.6 [ehailing]",
+        "2024 Perodua Bezza 1.3 [ehailing]",
+        "2020 Perodua Bezza 1.3 [ehailing]",
+        "2017 Perodua Alza 1.5 [ehailing,big-boot]",
+        "2026 Toyota Vios 1.5 [big-boot,ehailing]",
+        "2015 Toyota Vios 1.5 [ehailing]",
+        "2018 Proton Persona 1.6 [ehailing]"
+      ]
+    },
+    {
+      "q": "first car for a fresh graduate",
+      "trait": "first-car",
+      "p10": 0.6,
+      "baseRate": 0.132,
+      "top": [
+        "2019 Mercedes-Benz C-Class 1.5 [highway]",
+        "2026 Toyota Yaris 1.5 [first-car]",
+        "2021 Proton Iriz 1.6 [first-car]",
+        "2017 Proton Saga 1.3 [first-car]",
+        "2026 Proton Saga 1.3 [first-car,low-maintenance]",
+        "2021 Mercedes-Benz C-Class 1.5 [highway]",
+        "2026 Mercedes-Benz C-Class 1.5 [highway,luxury]",
+        "2019 Mercedes-Benz C-Class 1.5 [luxury]",
+        "2017 Proton Saga 1.3 [first-car,low-maintenance]",
+        "2021 Proton Iriz 1.6 [first-car]"
+      ]
+    },
+    {
+      "q": "easy to drive car for a new driver",
+      "trait": "first-car",
+      "p10": 0.2,
+      "baseRate": 0.132,
+      "top": [
+        "2015 Toyota Camry 2.5 [highway]",
+        "2023 Honda HR-V 1.5 [highway,fuel-saver]",
+        "2023 Mazda Mazda2 1.5 [first-car,performance]",
+        "2017 Mercedes-Benz E-Class 2.0 [highway]",
+        "2019 Mercedes-Benz E-Class 2.0 [highway,performance]",
+        "2015 Mercedes-Benz C-Class 1.5 [highway,luxury]",
+        "2013 Honda CR-V 1.5 [highway]",
+        "2020 Honda CR-V 1.5 [highway,family]",
+        "2016 Toyota Camry 2.5 [luxury,highway]",
+        "2026 Toyota Yaris 1.5 [first-car]"
+      ]
+    },
+    {
+      "q": "kereta pertama untuk anak yang baru dapat lesen",
+      "trait": "first-car",
+      "p10": 0,
+      "baseRate": 0.132,
+      "top": [
+        "2024 Mercedes-Benz E-Class 2.0 [performance]",
+        "2021 Mercedes-Benz E-Class 2.0 [luxury,performance]",
+        "2017 Mercedes-Benz C-Class 1.5 [highway]",
+        "2019 Mercedes-Benz C-Class 1.5 [luxury]",
+        "2019 Mercedes-Benz C-Class 1.5 [highway]",
+        "2019 Mercedes-Benz E-Class 2.0 [highway,performance]",
+        "2026 Mercedes-Benz C-Class 1.5 [highway]",
+        "2017 Toyota Innova 2.0 [ehailing,family]",
+        "2019 Mercedes-Benz E-Class 2.0 [highway,performance]",
+        "2018 Mercedes-Benz E-Class 2.0 [performance]"
+      ]
+    },
+    {
+      "q": "family car for school runs with the kids",
+      "trait": "family",
+      "p10": 1,
+      "baseRate": 0.1915,
+      "top": [
+        "2025 BMW X3 2.0 [family]",
+        "2023 BMW X3 2.0 [family]",
+        "2017 Toyota Innova 2.0 [family]",
+        "2019 BMW X3 2.0 [family]",
+        "2026 Mazda CX-5 2.0 [performance,family]",
+        "2024 Proton X90 1.5 [family]",
+        "2024 Proton X90 1.5 [family]",
+        "2015 Mazda CX-5 2.0 [family,highway]",
+        "2023 Honda HR-V 1.5 [family,fuel-saver]",
+        "2021 Toyota Corolla Cross 1.8 [family,fuel-saver]"
+      ]
+    },
+    {
+      "q": "space for child seats and parents",
+      "trait": "family",
+      "p10": 1,
+      "baseRate": 0.1915,
+      "top": [
+        "2024 BYD Atto 3 EV [family]",
+        "2024 BYD Atto 3 EV [family]",
+        "2023 BYD Atto 3 EV [family]",
+        "2025 Perodua Alza 1.5 [family,big-boot]",
+        "2025 Perodua Alza 1.5 [family]",
+        "2024 Toyota Innova 2.0 [big-boot,family]",
+        "2023 Proton X90 1.5 [family,big-boot]",
+        "2014 Mazda CX-5 2.0 [family]",
+        "2023 Perodua Aruz 1.5 [family,offroad]",
+        "2023 Proton X90 1.5 [family,big-boot]"
+      ]
+    },
+    {
+      "q": "very economical on petrol",
+      "trait": "fuel-saver",
+      "p10": 1,
+      "baseRate": 0.223,
+      "top": [
+        "2023 Perodua Ativa 1.0 [fuel-saver,first-car]",
+        "2023 Perodua Ativa 1.0 [fuel-saver,first-car]",
+        "2023 Perodua Ativa 1.0 [fuel-saver,first-car]",
+        "2022 Perodua Axia 1.0 [fuel-saver,first-car]",
+        "2025 Perodua Axia 1.0 [fuel-saver]",
+        "2015 Perodua Axia 1.0 [fuel-saver,first-car]",
+        "2025 Perodua Ativa 1.0 [fuel-saver,first-car]",
+        "2025 Perodua Ativa 1.0 [fuel-saver,first-car]",
+        "2017 Perodua Myvi 1.5 [fuel-saver]",
+        "2019 Perodua Axia 1.0 [fuel-saver,low-maintenance]"
+      ]
+    },
+    {
+      "q": "kereta jimat minyak",
+      "trait": "fuel-saver",
+      "p10": 0.4,
+      "baseRate": 0.223,
+      "top": [
+        "2024 Proton S70 1.5 [performance]",
+        "2026 Proton S70 1.5 [performance]",
+        "2023 BYD Atto 3 EV [fuel-saver]",
+        "2017 Proton Iriz 1.6 [fuel-saver]",
+        "2026 Proton S70 1.5 [performance,highway]",
+        "2023 Perodua Axia 1.0 [fuel-saver]",
+        "2026 Proton S70 1.5 [performance,highway]",
+        "2013 Mercedes-Benz E-Class 2.0 [performance,highway]",
+        "2017 Proton Iriz 1.6 [fuel-saver]",
+        "2025 Proton S70 1.5 [performance]"
+      ]
+    },
+    {
+      "q": "big boot for a stroller and groceries",
+      "trait": "big-boot",
+      "p10": 1,
+      "baseRate": 0.1925,
+      "top": [
+        "2022 Honda CR-V 1.5 [big-boot]",
+        "2014 Toyota Hilux 2.4 [big-boot,offroad]",
+        "2019 Proton X70 1.5 [big-boot]",
+        "2021 Proton X70 1.5 [big-boot,family]",
+        "2013 Honda CR-V 1.5 [big-boot]",
+        "2013 Honda CR-V 1.5 [family,big-boot]",
+        "2023 Proton X90 1.5 [big-boot,family]",
+        "2021 Honda CR-V 1.5 [big-boot]",
+        "2014 Honda CR-V 1.5 [family,big-boot]",
+        "2020 Proton X70 1.5 [big-boot]"
+      ]
+    },
+    {
+      "q": "lots of cargo space for moving house",
+      "trait": "big-boot",
+      "p10": 1,
+      "baseRate": 0.1925,
+      "top": [
+        "2013 Toyota Hilux 2.4 [big-boot,offroad]",
+        "2026 Proton X90 1.5 [big-boot,highway]",
+        "2025 Proton X70 1.5 [big-boot]",
+        "2023 Proton X90 1.5 [big-boot,family]",
+        "2021 Proton X70 1.5 [big-boot]",
+        "2015 Toyota Hilux 2.4 [big-boot,offroad]",
+        "2015 Toyota Hilux 2.4 [big-boot,offroad]",
+        "2015 Toyota Hilux 2.4 [big-boot]",
+        "2014 Perodua Alza 1.5 [big-boot,ehailing]",
+        "2026 Perodua Bezza 1.3 [big-boot,fuel-saver]"
+      ]
+    },
+    {
+      "q": "comfortable for long outstation drives",
+      "trait": "highway",
+      "p10": 1,
+      "baseRate": 0.229,
+      "top": [
+        "2024 Toyota Camry 2.5 [highway,luxury]",
+        "2017 BMW X3 2.0 [highway,luxury]",
+        "2017 Toyota Camry 2.5 [luxury,highway]",
+        "2022 BMW X3 2.0 [highway,family]",
+        "2017 Honda HR-V 1.5 [highway]",
+        "2025 Toyota Camry 2.5 [highway,luxury]",
+        "2025 Proton X90 1.5 [highway,family]",
+        "2026 Toyota Camry 2.5 [highway,luxury]",
+        "2026 Toyota Camry 2.5 [highway]",
+        "2019 Toyota Camry 2.5 [luxury,highway]"
+      ]
+    },
+    {
+      "q": "quiet and stable at highway speed",
+      "trait": "highway",
+      "p10": 1,
+      "baseRate": 0.229,
+      "top": [
+        "2024 Honda Civic 1.5 [highway]",
+        "2013 Honda CR-V 1.5 [highway]",
+        "2023 Honda Civic 1.5 [performance,highway]",
+        "2024 Proton X50 1.5 [performance,highway]",
+        "2017 Honda Civic 1.5 [highway,performance]",
+        "2024 Honda Civic 1.5 [performance,highway]",
+        "2017 Honda Civic 1.5 [highway,performance]",
+        "2023 Proton X50 1.5 [highway]",
+        "2023 Honda HR-V 1.5 [highway,fuel-saver]",
+        "2017 Honda Civic 1.5 [highway]"
+      ]
+    },
+    {
+      "q": "can handle plantation roads and floods",
+      "trait": "offroad",
+      "p10": 1,
+      "baseRate": 0.077,
+      "top": [
+        "2022 Perodua Aruz 1.5 [offroad]",
+        "2024 Perodua Aruz 1.5 [offroad]",
+        "2022 Nissan Navara 2.5 [offroad]",
+        "2022 Perodua Aruz 1.5 [offroad]",
+        "2025 Toyota Hilux 2.4 [offroad]",
+        "2020 Perodua Aruz 1.5 [offroad]",
+        "2023 Perodua Aruz 1.5 [offroad,family]",
+        "2025 Perodua Aruz 1.5 [offroad]",
+        "2022 Nissan Navara 2.5 [offroad]",
+        "2014 Toyota Hilux 2.4 [offroad]"
+      ]
+    },
+    {
+      "q": "for camping trips on rough terrain",
+      "trait": "offroad",
+      "p10": 1,
+      "baseRate": 0.077,
+      "top": [
+        "2016 Nissan Navara 2.5 [offroad,big-boot]",
+        "2023 Nissan Navara 2.5 [offroad,big-boot]",
+        "2025 Perodua Aruz 1.5 [offroad,family]",
+        "2019 Perodua Aruz 1.5 [family,offroad]",
+        "2022 Nissan Navara 2.5 [offroad]",
+        "2024 Nissan Navara 2.5 [big-boot,offroad]",
+        "2020 Nissan Navara 2.5 [offroad,big-boot]",
+        "2024 Nissan Navara 2.5 [offroad,big-boot]",
+        "2025 Nissan Navara 2.5 [offroad,big-boot]",
+        "2021 Perodua Aruz 1.5 [offroad]"
+      ]
+    },
+    {
+      "q": "premium executive comfort",
+      "trait": "luxury",
+      "p10": 1,
+      "baseRate": 0.116,
+      "top": [
+        "2024 Tesla Model 3 EV [luxury]",
+        "2015 Mercedes-Benz E-Class 2.0 [luxury]",
+        "2015 Mercedes-Benz C-Class 1.5 [luxury]",
+        "2013 Mercedes-Benz E-Class 2.0 [highway,luxury]",
+        "2023 Tesla Model 3 EV [performance,luxury]",
+        "2015 Mercedes-Benz C-Class 1.5 [luxury,highway]",
+        "2015 Mercedes-Benz C-Class 1.5 [luxury,highway]",
+        "2016 Mercedes-Benz E-Class 2.0 [luxury]",
+        "2014 Mercedes-Benz E-Class 2.0 [luxury]",
+        "2014 Mercedes-Benz C-Class 1.5 [luxury,highway]"
+      ]
+    },
+    {
+      "q": "kereta mewah dan selesa",
+      "trait": "luxury",
+      "p10": 1,
+      "baseRate": 0.116,
+      "top": [
+        "2013 Mercedes-Benz C-Class 1.5 [luxury,highway]",
+        "2013 Mercedes-Benz E-Class 2.0 [luxury,performance]",
+        "2026 BMW X3 2.0 [family,luxury]",
+        "2026 Toyota Camry 2.5 [luxury,highway]",
+        "2019 Mercedes-Benz E-Class 2.0 [luxury,highway]",
+        "2024 Toyota Camry 2.5 [luxury]",
+        "2015 Mercedes-Benz C-Class 1.5 [luxury]",
+        "2026 Toyota Camry 2.5 [highway,luxury]",
+        "2015 Mercedes-Benz C-Class 1.5 [highway,luxury]",
+        "2025 Toyota Camry 2.5 [luxury]"
+      ]
+    },
+    {
+      "q": "cheap to maintain, parts easy to find",
+      "trait": "low-maintenance",
+      "p10": 1,
+      "baseRate": 0.0805,
+      "top": [
+        "2021 Perodua Axia 1.0 [low-maintenance]",
+        "2021 Perodua Axia 1.0 [low-maintenance,fuel-saver]",
+        "2021 Proton Saga 1.3 [low-maintenance,first-car]",
+        "2015 Perodua Axia 1.0 [low-maintenance]",
+        "2026 BYD Atto 3 EV [low-maintenance]",
+        "2022 Proton Saga 1.3 [low-maintenance,first-car]",
+        "2017 Perodua Axia 1.0 [low-maintenance]",
+        "2024 Perodua Myvi 1.5 [low-maintenance,first-car]",
+        "2020 Proton Persona 1.6 [low-maintenance,big-boot]",
+        "2016 Perodua Myvi 1.5 [low-maintenance,ehailing]"
+      ]
+    },
+    {
+      "q": "sporty with quick acceleration",
+      "trait": "performance",
+      "p10": 1,
+      "baseRate": 0.1655,
+      "top": [
+        "2023 Proton X50 1.5 [performance]",
+        "2023 Proton X50 1.5 [highway,performance]",
+        "2023 Honda Civic 1.5 [performance]",
+        "2024 Proton S70 1.5 [performance]",
+        "2022 Proton X50 1.5 [performance]",
+        "2024 Proton S70 1.5 [performance]",
+        "2024 Proton S70 1.5 [performance]",
+        "2023 Proton S70 1.5 [performance]",
+        "2024 Tesla Model Y EV [performance]",
+        "2023 Proton S70 1.5 [performance]"
+      ]
+    },
+    {
+      "q": "fun to drive on winding roads",
+      "trait": "performance",
+      "p10": 0.8,
+      "baseRate": 0.1655,
+      "top": [
+        "2024 Proton X50 1.5 [performance,highway]",
+        "2023 Honda Civic 1.5 [performance,highway]",
+        "2014 Mazda CX-5 2.0 [highway,performance]",
+        "2026 Mazda CX-5 2.0 [performance,highway]",
+        "2024 Honda Civic 1.5 [performance,highway]",
+        "2026 Honda Civic 1.5 [highway,performance]",
+        "2024 Honda City 1.5 [highway,ehailing]",
+        "2025 Honda Civic 1.5 [performance,highway]",
+        "2026 Proton S70 1.5 [performance,highway]",
+        "2015 Toyota Camry 2.5 [luxury,highway]"
+      ]
+    },
+    {
+      "q": "family SUV for weekend trips",
+      "trait": "family",
+      "p10": 1,
+      "baseRate": 0.5296875,
+      "top": [
+        "2024 Honda HR-V 1.5 [family]",
+        "2018 Honda HR-V 1.5 [highway,family]",
+        "2020 Honda CR-V 1.5 [highway,family]",
+        "2017 Honda HR-V 1.5 [highway,family]",
+        "2022 BMW X3 2.0 [family]",
+        "2022 Honda HR-V 1.5 [family,highway]",
+        "2022 BMW X3 2.0 [highway,family]",
+        "2017 Honda HR-V 1.5 [family,highway]",
+        "2026 Toyota Corolla Cross 1.8 [highway,family]",
+        "2017 BMW X3 2.0 [family]"
+      ]
+    },
+    {
+      "q": "economical sedan for the daily commute",
+      "trait": "fuel-saver",
+      "p10": 0.2,
+      "baseRate": 0.14566929133858267,
+      "top": [
+        "2015 Mercedes-Benz C-Class 1.5 [highway,luxury]",
+        "2026 Mercedes-Benz C-Class 1.5 [highway,luxury]",
+        "2019 Honda City 1.5 [fuel-saver,highway]",
+        "2014 Mercedes-Benz C-Class 1.5 [luxury,highway]",
+        "2021 Mercedes-Benz C-Class 1.5 [highway]",
+        "2019 Mercedes-Benz C-Class 1.5 [highway]",
+        "2013 Mercedes-Benz C-Class 1.5 [luxury,highway]",
+        "2025 Mercedes-Benz C-Class 1.5 [highway,luxury]",
+        "2022 Honda City 1.5 [ehailing,fuel-saver]",
+        "2015 Mercedes-Benz C-Class 1.5 [highway,luxury]"
+      ]
+    },
+    {
+      "q": "budget car for e-hailing",
+      "trait": "ehailing",
+      "p10": 1,
+      "baseRate": 0.19551681195516812,
+      "top": [
+        "2022 Proton Persona 1.6 [ehailing]",
+        "2017 Toyota Innova 2.0 [ehailing,family]",
+        "2014 Nissan Almera 1.0 [ehailing,fuel-saver]",
+        "2013 Nissan Almera 1.0 [ehailing,fuel-saver]",
+        "2021 Proton Persona 1.6 [low-maintenance,ehailing]",
+        "2016 Toyota Innova 2.0 [ehailing,family]",
+        "2018 Toyota Innova 2.0 [family,ehailing]",
+        "2017 Nissan Almera 1.0 [fuel-saver,ehailing]",
+        "2018 Proton Persona 1.6 [ehailing]",
+        "2020 Perodua Bezza 1.3 [ehailing]"
+      ]
+    }
+  ]
+}

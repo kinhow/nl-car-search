@@ -3,6 +3,7 @@ import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { z } from "zod";
 import { PARSE_MODEL } from "./parse-query";
 import { LISTING_BY_ID } from "./search";
+import { isDemo } from "./demo";
 import { searchGuide } from "./vector-index";
 
 const AnswerSchema = z.object({
@@ -16,6 +17,7 @@ export interface AskResponse {
   answer: string;
   citations: { id: string; title: string }[];
   retrieved: { id: string; title: string; score: number }[];
+  demo?: boolean;
 }
 
 const SYSTEM = `You answer a buyer's question about one used-car listing on a Malaysian marketplace.
@@ -33,6 +35,10 @@ export async function askAboutListing(listingId: string, question: string): Prom
   if (!listing) throw new Error(`Unknown listing ${listingId}`);
 
   const hits = await searchGuide(question, 3);
+  const retrieved = hits.map((h) => ({ id: `guide:${h.chunk.id}`, title: h.chunk.title, score: Number(h.score.toFixed(3)) }));
+  if (isDemo()) {
+    return { grounded: false, answer: "Demo mode: the AI answer is off. These guide sections match your question best.", citations: [], retrieved, demo: true };
+  }
   const { traits: _hidden, ...facts } = listing;
   const sources = [
     { id: "listing", title: listing.title, text: JSON.stringify(facts) },
@@ -59,6 +65,6 @@ export async function askAboutListing(listingId: string, question: string): Prom
     grounded: out.grounded && citations.length > 0,
     answer: out.answer,
     citations,
-    retrieved: hits.map((h) => ({ id: `guide:${h.chunk.id}`, title: h.chunk.title, score: Number(h.score.toFixed(3)) })),
+    retrieved,
   };
 }
