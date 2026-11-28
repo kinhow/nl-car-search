@@ -16,7 +16,10 @@ export async function POST(req: Request) {
   const body = Body.safeParse(await req.json().catch(() => null));
   if (!body.success) return Response.json({ error: "Send { query: string } (max 300 characters)." }, { status: 400 });
   try {
-    return Response.json(await runSearch(body.data));
+    const result = await runSearch(body.data);
+    // One line for each search in the function logs, so the timing split can be read in production.
+    console.log(JSON.stringify({ event: "search", mode: result.mode, matches: result.total, ms: result.timingMs }));
+    return Response.json(result);
   } catch (err) {
     console.error("search failed", err);
     return Response.json({ error: "Search failed. Please try again." }, { status: 500 });

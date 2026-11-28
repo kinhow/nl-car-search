@@ -46,17 +46,31 @@ export async function parseQuery(query: string): Promise<ParsedQuery> {
   return (await parseQueryDetailed(query)).output;
 }
 
-/** Same as parseQuery, plus token usage for the eval's cost report. */
-export async function parseQueryDetailed(query: string): Promise<{ output: ParsedQuery; usage: Anthropic.Usage }> {
+export interface ParseTiming {
+  /** Time to the first output token: network, queue and prompt processing. */
+  firstTokenMs: number;
+  /** Time from the first token to the end: the model writes the JSON. */
+  outputMs: number;
+}
+
+/** Same as parseQuery, plus token usage for the eval's cost report and a timing split. */
+export async function parseQueryDetailed(query: string): Promise<{ output: ParsedQuery; usage: Anthropic.Usage; timing: ParseTiming }> {
+  const t0 = performance.now();
+  let tFirst: number | null = null;
   let response;
   try {
-    response = await client().messages.parse({
+    // A stream gives the same final message, and also tells us when the first token arrived.
+    const stream = client().messages.stream({
       model: PARSE_MODEL,
       max_tokens: 2000,
       system: [{ type: "text", text: SYSTEM, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: query }],
       output_config: { effort: "low", format: zodOutputFormat(ParsedQuerySchema) },
     });
+    stream.on("streamEvent", (e) => {
+      if (tFirst == null && e.type === "content_block_delta") tFirst = performance.now();
+    });
+    response = await stream.finalMessage();
   } catch (err) {
     if (err instanceof Anthropic.AuthenticationError) throw new ParseError("Anthropic API key is missing or invalid.", "auth");
     if (err instanceof Anthropic.RateLimitError) throw new ParseError("Rate limited by the Anthropic API.", "rate_limit");
@@ -64,8 +78,11 @@ export async function parseQueryDetailed(query: string): Promise<{ output: Parse
     if (err instanceof Anthropic.APIError) throw new ParseError(`Anthropic API error ${err.status}: ${err.message}`, "api");
     throw err;
   }
+  const tEnd = performance.now();
+  const first = tFirst ?? tEnd;
+  const timing = { firstTokenMs: Math.round(first - t0), outputMs: Math.round(tEnd - first) };
 
   if (response.stop_reason === "refusal") throw new ParseError("The model declined this query.", "refusal");
   if (!response.parsed_output) throw new ParseError(`No parsable output (stop_reason: ${response.stop_reason}).`, "unparsable");
-  return { output: response.parsed_output, usage: response.usage };
+  return { output: response.parsed_output, usage: response.usage, timing };
 }

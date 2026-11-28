@@ -16,8 +16,13 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   // Route handlers read these at runtime with fs, so Vercel must ship them.
   outputFileTracingIncludes: {
-    "/api/search": ["./src/data/vectors/**", "./src/data/guide.md", ...ONNX],
-    "/api/ask": ["./src/data/vectors/**", "./src/data/guide.md", ...ONNX],
+    "/api/search": ["./src/data/vectors/**", "./src/data/guide.md", "./models/**", ...ONNX],
+    "/api/ask": ["./src/data/vectors/**", "./src/data/guide.md", "./models/**", ...ONNX],
+  },
+  // transformers.js pulls in sharp for image models. This app only embeds text.
+  outputFileTracingExcludes: {
+    "/api/search": ["./node_modules/sharp/**", "./node_modules/@img/**"],
+    "/api/ask": ["./node_modules/sharp/**", "./node_modules/@img/**"],
   },
   turbopack: {
     rules: {

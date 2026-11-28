@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "tsx scripts/fetch-model.ts",
     "build": "next build",
+    "model:fetch": "tsx scripts/fetch-model.ts",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
@@ -16,6 +18,7 @@
     "eval": "tsx --env-file-if-exists=.env.local evals/run.ts",
     "eval:parse": "tsx --env-file-if-exists=.env.local evals/run.ts parse",
     "eval:retrieval": "tsx --env-file-if-exists=.env.local evals/run.ts retrieval",
+    "eval:fastpath": "tsx evals/run.ts fastpath",
     "eval:ask": "tsx --env-file-if-exists=.env.local evals/run.ts ask"
   },
   "dependencies": {

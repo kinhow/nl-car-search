@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Embedding model, downloaded at build time (scripts/fetch-model.ts)
+/models/
